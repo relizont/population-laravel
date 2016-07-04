@@ -24,9 +24,7 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/', function () {
-        return view('welcome');
-    })->middleware('guest');
+    Route::get('/', 'HomeController@index')->middleware('guest');
 
     Route::get('/tasks', 'TaskController@index');
     Route::post('/task', 'TaskController@store');
@@ -34,18 +32,18 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::auth();
 
-    Route::get('/countries', 'CountryController@index')->middleware('guest');
-    Route::post('/country', 'CountryController@store')->middleware('guest');
-    Route::delete('/country/{country}', 'CountryController@destroy')->middleware('guest');
+    Route::get('/countries', 'CountryController@index')->middleware('auth');
+    Route::post('/country', 'CountryController@store')->middleware('auth');
+    Route::delete('/country/{country}', 'CountryController@destroy')->middleware('auth');
 
-    Route::get('/cities', 'CityController@index')->middleware('guest');
-    Route::post('/city', 'CityController@store')->middleware('guest');
-    Route::delete('/city/{city}', 'CityController@destroy')->middleware('guest');
+    Route::get('/cities', 'CityController@index')->middleware('auth');
+    Route::post('/city', 'CityController@store')->middleware('auth');
+    Route::delete('/city/{city}', 'CityController@destroy')->middleware('auth');
 
     // Route::resource('population', 'PopulationController');
 
-    Route::get('/population', 'PopulationController@index')->middleware('guest');
-    Route::post('/population', 'PopulationController@store')->middleware('guest');
-    Route::delete('/population/{population}', 'PopulationController@destroy')->middleware('guest');
+    Route::get('/population', 'PopulationController@index')->middleware('auth');
+    Route::post('/population', 'PopulationController@store')->middleware('auth');
+    Route::delete('/population/{population}', 'PopulationController@destroy')->middleware('auth');
 
 });

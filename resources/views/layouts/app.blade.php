@@ -14,6 +14,7 @@
     <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ 'css/app.css' }}" rel="stylesheet">
 
     <style>
         body {
@@ -39,14 +40,18 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <!-- <a class="navbar-brand" href="{{ url('/') }}">
                     Task List
-                </a>
+                </a> -->
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/') }}">Home</a></li>
+                    <li><a href="{{ url('/cities') }}">City</a></li>
+                    <li><a href="{{ url('/countries') }}">Country</a></li>
+                    <li><a href="{{ url('/population') }}">Population</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

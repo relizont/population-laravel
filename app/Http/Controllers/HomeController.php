@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
+use App\Population;
+use App\Country;
+use App\City;
+use App\Gender;
+use App\Type;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Country;
-use App\City;
-use App\Type;
-use App\Gender;
-use App\Population;
-
-class PopulationController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,15 +21,27 @@ class PopulationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $countries = Country::lists('name','id');
-        $cities = City::lists('name','id');
-        $types = Type::lists('name','id');
-        $gender = Gender::lists('name','id');        
+    {   
+        /*$population_list = DB::table('population')
+                            ->select('country_id', DB::raw('SUM(total) as total'))
+                            ->groupBy('country_id')
+                            ->get();*/
+        // $population_list = Population::all();
 
-        // dd(Population::all()->toArray());
-         return view('population.index', [
-            'populations' => Population::all(),
+        $population_list = Population::groupBy('country_id')
+               ->selectRaw('*, sum(total) as sum')
+               ->orderBy('sum', 'desc')                       
+               ->get();                            
+
+        // dd($population_list);
+
+        $countries = Country::all();
+        $cities = City::all();
+        $gender = Gender::all();
+        $types = Type::all();
+        
+        return view('home.index',[
+            'population_list'=>$population_list,
             'countries'=>$countries,
             'cities'=>$cities,
             'types'=>$types,
@@ -55,25 +67,7 @@ class PopulationController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'country_id' => 'required',
-            'city_id' => 'required',
-            'type_id' => 'required',
-            'gender_id' => 'required',
-            'total' => 'required'
-        ]);
-
-        $population = new Population;
-
-        $population->country_id = $request->country_id;
-        $population->city_id = $request->city_id;
-        $population->type_id = $request->type_id;
-        $population->gender_id = $request->gender_id;
-        $population->total = $request->total;
-
-        $population->save();
-
-        return redirect('/population');
+        //
     }
 
     /**
@@ -118,7 +112,6 @@ class PopulationController extends Controller
      */
     public function destroy($id)
     {
-        Population::destroy($id);
-        return redirect('/population');
+        //
     }
 }

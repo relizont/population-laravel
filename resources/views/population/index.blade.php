@@ -81,7 +81,7 @@
             </div>
 
             <!-- Current Tasks -->
-            @if (count($population) > 0)
+            @if (count($populations) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Current Population
@@ -98,7 +98,7 @@
                                 <th>&nbsp;</th>
                             </thead>
                             <tbody>
-                                @foreach ($population as $population)
+                                @foreach ($populations as $population)
                                     <tr>
                                         <td class="table-text"><div>{{ $population->country->name }}</div></td>
                                         <td class="table-text"><div>{{ $population->city->name }}</div></td>

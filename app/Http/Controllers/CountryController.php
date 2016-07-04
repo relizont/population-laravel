@@ -33,11 +33,11 @@ class CountryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
-        ]);
+            ]);
 
         Country::create([
             'name' => $request->name,
-        ]);
+            ]);
 
         return redirect('/countries');
     }
