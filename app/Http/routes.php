@@ -44,6 +44,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/population', 'PopulationController@index')->middleware('auth');
     Route::post('/population', 'PopulationController@store')->middleware('auth');
-    Route::delete('/population/{population}', 'PopulationController@destroy')->middleware('auth');
+    Route::delete('/population/{population}', 'PopulationController@destroy')->middleware('auth');    
 
 });
+
+Route::get('/api/population','PopulationController@api')->middleware('guest');

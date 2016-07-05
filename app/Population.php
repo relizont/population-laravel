@@ -23,6 +23,7 @@ class Population extends Model
      * @var array
      */
     protected $casts = [
+        'country_id' => 'int',
         'city_id' => 'int',
     ];
 

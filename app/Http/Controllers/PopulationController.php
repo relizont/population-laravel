@@ -121,4 +121,43 @@ class PopulationController extends Controller
         Population::destroy($id);
         return redirect('/population');
     }
+
+    /**
+     * Display a listing of the resource for api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function api()
+    {
+        /*$population_list = DB::table('population')
+                            ->select('country_id', DB::raw('SUM(total) as total'))
+                            ->groupBy('country_id')
+                            ->get();*/        
+
+        $population_list = Population::groupBy('country_id')
+               ->selectRaw('*, sum(total) as sum')
+               ->orderBy('sum', 'desc')  
+               ->with('country')
+               ->get();
+
+        $populations = Population::all();
+
+        $countries = Country::with('cities')->get();
+        
+        $cities = City::all();
+
+        $types = Type::all();
+
+        $gender = Gender::all();
+
+         return [
+            'population_list' => $population_list,
+            'populations' => $populations,
+            'countries' => $countries,
+            'cities' => $cities,
+            'types' => $types,
+            'gender' => $gender
+        ];
+        
+    }
 }
