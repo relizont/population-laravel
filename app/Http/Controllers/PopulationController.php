@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use DB;
 use App\Http\Controllers\Controller;
 
 use App\Country;
@@ -169,7 +170,11 @@ class PopulationController extends Controller
      */
     public function getCountryPopulation()
     {
-        $list = Country::all();
+        $list = Population::groupBy('country_id')
+               ->selectRaw('id,country_id, sum(total) as sum')
+               ->orderBy('sum', 'desc')  
+               ->with('country')
+               ->get();
         return $list;
     }
 
@@ -181,7 +186,12 @@ class PopulationController extends Controller
      */
     public function getCityPopulationByCountry($id)
     {
-        $list = Country::find($id)->cities;
+        $list = Population::groupBy('city_id')
+               ->selectRaw('id,country_id,city_id, sum(total) as sum')
+               ->where('country_id',$id)
+               ->orderBy('sum', 'desc')  
+               ->with('city')
+               ->get();
         return $list;
     }
 
@@ -191,9 +201,16 @@ class PopulationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getGenderPopulationByCity($id)
+    public function getGenderPopulationByCity($country_id,$city_id)
     {
-        $list = Gender::all();
+        $list = Population::groupBy('gender_id')
+                ->selectRaw('*, sum(total) as sum')
+                ->where('country_id',$country_id)
+                ->where('city_id',$city_id)
+                ->orderBy('sum', 'desc')  
+                ->with('gender')
+                ->get();
+
         return $list;
     }
 
@@ -203,9 +220,19 @@ class PopulationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getTypePopulationByGender($id)
-    {
-        $list = Type::all();
+    public function getTypePopulationByGender($country_id=null,$city_id=null,$gender_id=null)
+    {   
+        $query = Population::groupBy('type_id')
+                ->selectRaw('*, sum(total) as sum')
+                ->orderBy('sum', 'desc')  
+                ->with('type');
+
+        if ($country_id) $query = $query->where('country_id',$country_id);
+        if ($city_id) $query = $query->where('city_id',$city_id);
+        if ($gender_id) $query = $query->where('gender_id',$gender_id);
+
+        $list = $query->get();               
+
         return $list;
     }
 
