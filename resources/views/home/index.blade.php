@@ -9,8 +9,8 @@
 				<div class="panel-body">
 				<div class="form-group">
 						<div class="col-sm-6 col-md-4">
-							<select class="form-control" data-ng-model="option1" data-ng-options="option for option in options1" ng-change="getCityListByCountry()">
-								<option>All Country</option>
+							<select class="form-control" ng-model="selectedCountryId" data-ng-options="value.id as value.name for value in countryOptions" ng-change="getCityPopulationListByCountry(selectedCountryId)">
+								<option value="">Select Country</option>
 								 {{-- <option ng-repeat="country in populationData.countries" value="<% country.id %>"><% country.name %></option> --}}
 								{{-- @foreach($countries as $country)
 								<option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -18,8 +18,8 @@
 							</select>
 						</div>
 						<div class="col-sm-6 col-md-4">
-							<select class="form-control" data-ng-model="option2" data-ng-options="option for option in options2">
-								<option>All States/Cities</option>
+							<select class="form-control" ng-model="selectedCityId" data-ng-options="value.id as value.name for value in cityOptions" ng-change="getGenderPopulationByCity(selectedCityId)">
+								<option value="">All Cities/States</option>
 								{{-- <option ng-repeat="city in populationData.cities" value="<% city.id %>"><% city.name %></option> --}}
 								{{-- @foreach($cities as $city)
 								<option value="{{ $city->id }}">{{ $city->name }}</option>
@@ -27,9 +27,9 @@
 							</select>
 						</div>
 						<div class="col-sm-6 col-md-4">
-							<select class="form-control">
-								<option>Population</option>
-								<option ng-repeat="item in populationData.gender" value="<% item.id %>"><% item.name %></option>
+							<select class="form-control" ng-model="selectedGenderId" data-ng-options="value.id as value.name for value in genderOptions" ng-change="listPopulationType(selectedGenderId)">
+								<option value="">Population</option>
+								{{-- <option ng-repeat="item in populationData.gender" value="<% item.id %>"><% item.name %></option> --}}
 								{{-- @foreach($gender as $gender_type)
 								<option value="{{ $gender_type->id }}">{{ $gender_type->name }}</option>
 								@endforeach --}}
@@ -38,7 +38,7 @@
 					</div>
 					<div class="form-group">&nbsp;</div>
 
-					<div class="form-group">
+					<div class="form-group" ng-show="showPopulationList">
 						<div class="table-responsive">
 							<table class="table">
 								<thead>
@@ -48,7 +48,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="item in populationData.types">
+									<tr ng-repeat="item in populationTypeList">
 										<td><% item.name %></td>
 										<td>1,000,000,000</td>
 									</tr>

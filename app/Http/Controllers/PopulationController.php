@@ -127,7 +127,7 @@ class PopulationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function api()
+    public function getPopulationInformation()
     {
         /*$population_list = DB::table('population')
                             ->select('country_id', DB::raw('SUM(total) as total'))
@@ -160,4 +160,53 @@ class PopulationController extends Controller
         ];
         
     }
+
+    /**
+     * Get country population
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getCountryPopulation()
+    {
+        $list = Country::all();
+        return $list;
+    }
+
+    /**
+     * Get city population by country
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getCityPopulationByCountry($id)
+    {
+        $list = Country::find($id)->cities;
+        return $list;
+    }
+
+    /**
+     * Get gender population by city
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getGenderPopulationByCity($id)
+    {
+        $list = Gender::all();
+        return $list;
+    }
+
+    /**
+     * Get population for population type under gender
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getTypePopulationByGender($id)
+    {
+        $list = Type::all();
+        return $list;
+    }
+
 }

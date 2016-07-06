@@ -48,4 +48,8 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
-Route::get('/api/population','PopulationController@api')->middleware('guest');
+Route::get('/api/population','PopulationController@getPopulationInformation')->middleware('guest');
+Route::get('/api/population/country','PopulationController@getCountryPopulation')->middleware('guest'); 
+Route::get('/api/population/city/{country}','PopulationController@getCityPopulationByCountry')->middleware('guest');
+Route::get('/api/population/gender/{city}','PopulationController@getGenderPopulationByCity')->middleware('guest');
+Route::get('/api/population/type/{gender}','PopulationController@getTypePopulationByGender')->middleware('guest');
