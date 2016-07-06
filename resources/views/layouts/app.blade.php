@@ -43,22 +43,21 @@
                     Task List
                 </a> -->
             </div>
-
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li><a href="{{ url('/cities') }}">City</a></li>
-                    <li><a href="{{ url('/countries') }}">Country</a></li>
-                    <li><a href="{{ url('/population') }}">Population</a></li>
+                    <li class="{!! Request::path() == '/' ? 'active' : '' !!}"><a href="{{ url('/') }}">Home</a></li>
+                    <li class="{!! Request::path() == 'population' ? 'active' : '' !!}"><a href="{{ url('/population') }}">Population</a></li>
+                    <li class="{!! Request::path() == 'cities' ? 'active' : '' !!}"><a href="{{ url('/cities') }}">City</a></li>
+                    <li class="{!! Request::path() == 'countries' ? 'active' : '' !!}"><a href="{{ url('/countries') }}">Country</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li class="{!! Request::path() == 'login' ? 'active' : '' !!}"><a href="{{ url('/login') }}">Login</a></li>
+                        <li class="{!! Request::path() == 'register' ? 'active' : '' !!}"><a href="{{ url('/register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

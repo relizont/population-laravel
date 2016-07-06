@@ -21,7 +21,7 @@ class PopulationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $countries = Country::lists('name','id');
         $cities = City::lists('name','id');
@@ -135,30 +135,14 @@ class PopulationController extends Controller
                             ->groupBy('country_id')
                             ->get();*/        
 
-        $population_list = Population::groupBy('country_id')
+        $list = Population::groupBy('country_id')
                ->selectRaw('*, sum(total) as sum')
                ->orderBy('sum', 'desc')  
                ->with('country')
+               ->take(3)
                ->get();
 
-        $populations = Population::all();
-
-        $countries = Country::with('cities')->get();
-        
-        $cities = City::all();
-
-        $types = Type::all();
-
-        $gender = Gender::all();
-
-         return [
-            'population_list' => $population_list,
-            'populations' => $populations,
-            'countries' => $countries,
-            'cities' => $cities,
-            'types' => $types,
-            'gender' => $gender
-        ];
+         return $list;
         
     }
 

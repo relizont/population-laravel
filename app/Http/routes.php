@@ -25,9 +25,9 @@
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('/',  function()
-    {
+    {        
         return view('home.index');
-    })->middleware('guest');
+    });
 
     Route::get('/tasks', 'TaskController@index');
     Route::post('/task', 'TaskController@store');
@@ -44,15 +44,17 @@ Route::group(['middleware' => ['web']], function () {
     Route::delete('/city/{city}', 'CityController@destroy')->middleware('auth');
 
     // Route::resource('population', 'PopulationController');
-
     Route::get('/population', 'PopulationController@index')->middleware('auth');
     Route::post('/population', 'PopulationController@store')->middleware('auth');
     Route::delete('/population/{population}', 'PopulationController@destroy')->middleware('auth');    
 
 });
 
-Route::get('/api/population','PopulationController@getPopulationInformation')->middleware('guest');
-Route::get('/api/population/country','PopulationController@getCountryPopulation')->middleware('guest'); 
-Route::get('/api/population/city/{country}','PopulationController@getCityPopulationByCountry')->middleware('guest');
-Route::get('/api/population/gender/{country}/{city}','PopulationController@getGenderPopulationByCity')->middleware('guest');
-Route::get('/api/population/type/{country?}/{city?}/{gender?}','PopulationController@getTypePopulationByGender')->middleware('guest');
+Route::group(['middleware' => 'api'], function () {
+
+    Route::get('/api/population','PopulationController@getPopulationInformation')->middleware('guest');
+    Route::get('/api/population/country','PopulationController@getCountryPopulation')->middleware('guest'); 
+    Route::get('/api/population/city/{country}','PopulationController@getCityPopulationByCountry')->middleware('guest');
+    Route::get('/api/population/gender/{country}/{city}','PopulationController@getGenderPopulationByCity')->middleware('guest');
+    Route::get('/api/population/type/{country?}/{city?}/{gender?}','PopulationController@getTypePopulationByGender')->middleware('guest');
+});

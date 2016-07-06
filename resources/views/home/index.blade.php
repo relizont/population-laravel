@@ -76,7 +76,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="(key,item) in populationData.population_list">
+									<tr ng-repeat="(key,item) in highestPopulationList">
 										<td><% key+1 %></td>
 										<td><% item.country.name %></td>
 										<td><% item.sum %></td>

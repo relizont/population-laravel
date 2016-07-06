@@ -5,7 +5,7 @@ var app = angular.module('populationApp',[],function($interpolateProvider) {
 
 app.controller('populationController', function($scope, $http) {
  
-    $scope.populationData = [];    
+    $scope.highestPopulationList = [];    
     $scope.loading = false;
 
     $scope.showPopulationList = true; // we'll get these later
@@ -67,7 +67,7 @@ app.controller('populationController', function($scope, $http) {
         $scope.loading = true;
         $http.get('/api/population').
         success(function(data, status, headers, config) {
-            $scope.populationData = data;
+            $scope.highestPopulationList = data;
             $scope.getCountryPopulation();
             $scope.loading = false; 
         });
