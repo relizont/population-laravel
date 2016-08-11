@@ -47,9 +47,9 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li class="{!! Request::path() == '/' ? 'active' : '' !!}"><a href="{{ url('/') }}">Home</a></li>
-                    <li class="{!! Request::path() == 'population' ? 'active' : '' !!}"><a href="{{ url('/population') }}">Population</a></li>
-                    <li class="{!! Request::path() == 'cities' ? 'active' : '' !!}"><a href="{{ url('/cities') }}">City</a></li>
                     <li class="{!! Request::path() == 'countries' ? 'active' : '' !!}"><a href="{{ url('/countries') }}">Country</a></li>
+                    <li class="{!! Request::path() == 'cities' ? 'active' : '' !!}"><a href="{{ url('/cities') }}">City</a></li>
+                    <li class="{!! Request::path() == 'population' ? 'active' : '' !!}"><a href="{{ url('/population') }}">Population</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
