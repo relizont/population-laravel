@@ -50,7 +50,7 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
-Route::group(['middleware' => 'api'], function () {
+Route::group(['middleware' => 'web'], function () {
 
     Route::get('/api/population','PopulationController@getPopulationInformation')->middleware('guest');
     Route::get('/api/population/country','PopulationController@getCountryPopulation')->middleware('guest'); 
