@@ -50,11 +50,11 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
-// Route::group(['middleware' => 'web'], function () {
+Route::group(['middleware' => 'web'], function () {
 
     Route::get('/api/population','PopulationController@getPopulationInformation');
     Route::get('/api/population/country','PopulationController@getCountryPopulation'); 
     Route::get('/api/population/city/{country}','PopulationController@getCityPopulationByCountry');
     Route::get('/api/population/gender/{country}/{city}','PopulationController@getGenderPopulationByCity');
     Route::get('/api/population/type/{country?}/{city?}/{gender?}','PopulationController@getTypePopulationByGender');
-// });
+});

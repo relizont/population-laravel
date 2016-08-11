@@ -65,7 +65,7 @@ app.controller('populationController', function($scope, $http) {
  
     $scope.init = function() {        
         $scope.loading = true;
-        $http.get('/api/population').
+        $http.get('api/population').
         success(function(data, status, headers, config) {
             $scope.highestPopulationList = data;
             $scope.getCountryPopulation();
