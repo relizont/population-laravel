@@ -1,56 +1,37 @@
 # Laravel: Population Information Search
-Based on Intermediate - Task List With Authentication
 
+Based on Intermediate - Task List With Authentication
 [http://laravel.com/docs/quickstart-intermediate](http://laravel.com/docs/quickstart-intermediate)
 
-## Generate migration commands
+## Clone the project
 ```
-  php artisan make:migration:schema create_types_table --schema="name:string"
-  php artisan make:migration:schema create_gender_table --schema="name:string"
-  php artisan make:migration:schema create_countries_table --schema="name:string"
-  php artisan make:migration:schema create_cities_table --schema="country_id:integer,name:string"
-  php artisan make:migration:schema create_population_table --schema="country_id:integer,city_id:integer,type_id:integer,male:integer,female:integer"
+git clone git@gitlab.websearchpro.net:dharmaraj/population-prototype-laravel.git population
 ```
 
-# Running Migrations
-`php artisan migrate`
-
-# Rolling Back Migrations
+## Install Dependencies with composer package manager
 ```
-php artisan migrate:rollback
-php artisan migrate:reset
+cd population
+composer install
 ```
 
-# Generate controller
+## Create .env file and update database configuration
 ```
-  php artisan make:controller CityController --resource
-  php artisan make:controller CountryController --resource
-  php artisan make:controller PopulationController --resource
-```
-
-# Register routes
-```
-  Route::resource('types', 'TypesController');
-  Route::resource('city', 'CityController');
-  Route::resource('country', 'CountryController');
-  Route::resource('population', 'PopulationController');
+cp .env.example .env
+nano .env
 ```
 
-# Writing Seeders
-```
-php artisan make:seeder GenderTableSeeder
-php artisan make:seeder TypesTableSeeder
-```
+## Generate Application Key to a random string
+`php artisan key:generate`
 
-# Running Seeders
+## Migrate tables and seed database tables with test data
 ```
+php artisan migrate
 php artisan db:seed
-php artisan db:seed --class=GenderTableSeeder
-php artisan db:seed --class=TypesTableSeeder
 ```
 
-# Rollback / Migrate In Single Command
-```
-php artisan migrate:refresh
-php artisan migrate:refresh --seed
-```
+## Provide permission to storage and cache directories
+`chmod -R 777 storage/ bootstrap/cache/`
+
+
+
+
