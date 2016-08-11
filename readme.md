@@ -32,6 +32,8 @@ php artisan db:seed
 ## Provide permission to storage and cache directories
 `chmod -R 777 storage/ bootstrap/cache/`
 
+## Serve project with artisan command
+`php artisan serve `
 
 
 
