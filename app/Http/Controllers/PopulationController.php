@@ -14,6 +14,8 @@ use App\Type;
 use App\Gender;
 use App\Population;
 
+use App\Http\Requests\StorePopulationPostRequest;
+
 class PopulationController extends Controller
 {
     /**
@@ -54,15 +56,15 @@ class PopulationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePopulationPostRequest $request)
     {
-        $this->validate($request, [
+        /*$this->validate($request, [
             'country_id' => 'required',
             'city_id' => 'required',
             'type_id' => 'required',
             'gender_id' => 'required',
             'total' => 'required'
-        ]);
+        ]);*/
 
         $population = new Population;
 
