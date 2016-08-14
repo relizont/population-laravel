@@ -48,9 +48,17 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/population', 'PopulationController@store')->middleware('auth');
     Route::delete('/population/{population}', 'PopulationController@destroy')->middleware('auth');    
 
+    // populate city dropdown for country option selected
+    Route::get('city/dropdown', function(){
+        $id = Request::input('id');
+        $cities = App\Country::find($id)->cities;
+        // return $cities->toJson();
+        return Response::json($cities);
+    });
+
 });
 
-Route::group(['middleware' => 'web'], function () {
+Route::group(['middleware' => 'api'], function () {
 
     Route::get('/api/population','PopulationController@getPopulationInformation');
     Route::get('/api/population/country','PopulationController@getCountryPopulation'); 

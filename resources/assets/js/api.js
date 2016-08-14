@@ -1,9 +1,9 @@
-var app = angular.module('populationApp',[],function($interpolateProvider) {
+var app = angular.module('populationApp',[],['$interpolateProvider',function($interpolateProvider) {
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
-});
+}]);
 
-app.controller('populationController', function($scope, $http) {
+app.controller('populationController', ['$scope','$http',function($scope, $http) {
  
     $scope.highestPopulationList = [];    
     $scope.loading = false;
@@ -71,9 +71,8 @@ app.controller('populationController', function($scope, $http) {
             $scope.getCountryPopulation();
             $scope.loading = false; 
         });
-    }
+    };
 
     $scope.init();
  
-});
-
+}]);
