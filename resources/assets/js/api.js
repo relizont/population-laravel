@@ -76,4 +76,3 @@ app.controller('populationController', function($scope, $http) {
     $scope.init();
  
 });
-
