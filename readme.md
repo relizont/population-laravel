@@ -35,5 +35,13 @@ php artisan db:seed
 ## Serve project with artisan command
 `php artisan serve `
 
-
+## Setup Laravel Elixir
+```
+sudo npm install
+bower init
+bower install
+gulp
+gulp --production
+gulp watch
+```
 
