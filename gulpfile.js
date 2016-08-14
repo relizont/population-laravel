@@ -24,6 +24,7 @@ elixir(function(mix) {
         '../bower/bootstrap/dist/js/bootstrap.js',
         '../bower/angular/angular.js',
         'api.js',
+        'main.js',
     ], 'public/js/app.js');
 
      mix.version(['css/app.css', 'js/app.js']);
