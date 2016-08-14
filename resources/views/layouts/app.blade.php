@@ -13,7 +13,7 @@
 
     <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
 
     <style>
         body {
@@ -47,9 +47,9 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li class="{!! Request::path() == '/' ? 'active' : '' !!}"><a href="{{ url('/') }}">Home</a></li>
-                    <li class="{!! Request::path() == 'population' ? 'active' : '' !!}"><a href="{{ url('/population') }}">Population</a></li>
-                    <li class="{!! Request::path() == 'cities' ? 'active' : '' !!}"><a href="{{ url('/cities') }}">City</a></li>
                     <li class="{!! Request::path() == 'countries' ? 'active' : '' !!}"><a href="{{ url('/countries') }}">Country</a></li>
+                    <li class="{!! Request::path() == 'cities' ? 'active' : '' !!}"><a href="{{ url('/cities') }}">City</a></li>
+                    <li class="{!! Request::path() == 'population' ? 'active' : '' !!}"><a href="{{ url('/population') }}">Population</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -80,7 +80,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ URL::asset('js/main.js') }}"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\City;
 use App\Country;
 
+use App\Http\Requests\StoreCityPostRequest;
+
 class CityController extends Controller
 {
     /**
@@ -42,13 +44,13 @@ class CityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCityPostRequest $request)
     {
-        $this->validate($request, [
+       /* $this->validate($request, [
             'name' => 'required|max:255',
             'country_id' => 'required',
         ]);
-
+    */
         $city = new City;
 
         $city->name = $request->name;

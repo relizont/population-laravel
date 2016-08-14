@@ -22,7 +22,7 @@ app.controller('populationController', function($scope, $http) {
         
         $scope.loading = true;
 
-        $http.get('/api/population/country').
+        $http.get('api/population/country').
         success(function(data, status, headers, config) {
             $scope.countryOptions = data;
             $scope.listPopulationType();
@@ -35,7 +35,7 @@ app.controller('populationController', function($scope, $http) {
         
         $scope.loading = true;
 
-        $http.get('/api/population/city/'+$scope.selectedCountryId).
+        $http.get('api/population/city/'+$scope.selectedCountryId).
         success(function(data, status, headers, config) {
             $scope.cityOptions = data;
             $scope.listPopulationType();
@@ -46,7 +46,7 @@ app.controller('populationController', function($scope, $http) {
 
     $scope.getGenderPopulationByCity = function(){        
         $scope.loading = true;
-        $http.get('/api/population/gender/'+$scope.selectedCountryId+'/'+$scope.selectedCityId).
+        $http.get('api/population/gender/'+$scope.selectedCountryId+'/'+$scope.selectedCityId).
         success(function(data, status, headers, config) {
             $scope.genderOptions = data;
             $scope.listPopulationType();
@@ -56,7 +56,7 @@ app.controller('populationController', function($scope, $http) {
 
     $scope.listPopulationType = function(){        
         $scope.loading = true;
-        $http.get('/api/population/type/'+$scope.selectedCountryId+'/'+$scope.selectedCityId+'/'+$scope.selectedGenderId).
+        $http.get('api/population/type/'+$scope.selectedCountryId+'/'+$scope.selectedCityId+'/'+$scope.selectedGenderId).
         success(function(data, status, headers, config) {
             $scope.populationTypeList = data;            
             $scope.loading = false; 
@@ -65,7 +65,7 @@ app.controller('populationController', function($scope, $http) {
  
     $scope.init = function() {        
         $scope.loading = true;
-        $http.get('/api/population').
+        $http.get('api/population').
         success(function(data, status, headers, config) {
             $scope.highestPopulationList = data;
             $scope.getCountryPopulation();
